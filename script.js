@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     createParticles();
     initNavbar();
+    initThemeToggle();
     initHeroAnimations();
     initServicesDrag();
     initTimeline();
@@ -12,6 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
     initSectionHeaders();
     initHelmet3D();
 });
+
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        if (newTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        
+        localStorage.setItem('theme', newTheme);
+    });
+}
 
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
